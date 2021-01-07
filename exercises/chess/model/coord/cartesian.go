@@ -2,17 +2,17 @@ package coord
 
 import "fmt"
 
-//Cartesian represent a set of cartesian coordinates, x and y
+// Cartesian represent a set of cartesian coordinates, x and y.
 type Cartesian struct {
 	x, y int
 }
 
-//NewCartesian is the constructer for Cartesian
+// NewCartesian is the constructer for Cartesian.
 func NewCartesian(x, y int) Cartesian {
 	return Cartesian{x, y}
 }
 
-//Coord returns x if n==0, y if n==1
+// Coord returns x if n==0, y if n==1
 func (c Cartesian) Coord(n int) (int, error) {
 	switch n {
 	case 0:
@@ -25,5 +25,5 @@ func (c Cartesian) Coord(n int) (int, error) {
 }
 
 func (c Cartesian) String() string {
-	panic("TODO")
+	return fmt.Sprintf("%c%d", 65+c.y, c.x+1)
 }

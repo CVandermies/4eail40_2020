@@ -6,6 +6,6 @@ package player
 type Color int
 
 const (
-	White Color = 1
-	Black Color = 2
+	White Color = iota
+	Black
 )

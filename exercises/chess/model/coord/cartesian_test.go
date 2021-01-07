@@ -17,20 +17,62 @@ func TestCartesian_Coord(t *testing.T) {
 
 	tests := map[int]int{
 		0: 1,
-		1:2,
+		1: 2,
 	}
-	
-	for n, want := range tests{
-		t.Run(string(rune(n)), func(t *testing.T){
-		got, err := c.Coord(n)
-		if err != nil {
-			t.Error(err)
-		}
-		if got != want {
-			t.Errorf("expected %d, but got %d", want, got)
-		}
+
+	for n, want := range tests {
+		t.Run(string(rune(n)), func(t *testing.T) {
+			got, err := c.Coord(n)
+			if err != nil {
+				t.Error(err)
+			}
+			if got != want {
+				t.Errorf("expected %d, but got %d", want, got)
+			}
 
 		})
+	}
+
+	// test for err
+	t.Run("err", func(t *testing.T) {
+		_, err := c.Coord(2)
+		if err == nil {
+			t.Errorf("expected and error for n == 2")
+		}
+	})
 }
-	
-t.Run("err")
+
+func TestCartesian_String(t *testing.T) {
+	type fields struct {
+		x int
+		y int
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   string
+	}{
+		{
+			"B2",
+			fields{1, 1},
+			"B2",
+		},
+		{
+			"G7",
+			fields{6, 6},
+			"G7",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			c := Cartesian{
+				x: tt.fields.x,
+				y: tt.fields.y,
+			}
+			if got := c.String(); got != tt.want {
+				t.Errorf("String() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
